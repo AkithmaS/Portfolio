@@ -1,0 +1,24 @@
+:root {
+  /* Colors — dark theme matching reference site */
+  --color-primary:        #121212;   /* near-black body bg */
+  --color-secondary:      #1e1e2e;   /* dark surface */
+  --color-accent:         #b026ff;   /* vivid purple */
+  --color-accent-alt:     #e040fb;   /* magenta-purple */
+  --color-accent-blue:    #4fc3f7;   /* light blue */
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #b0b0c0;
+  --color-border:         #2a2a3e;
+
+  /* Corner blob decorations — replicate the colorful edge blobs */
+  --blob-tl: radial-gradient(ellipse 55% 55% at 0% 0%,   rgba(176,38,255,0.38), transparent 70%);
+  --blob-br: radial-gradient(ellipse 55% 55% at 100% 100%, rgba(224,64,251,0.28), transparent 70%);
+
+  /* Typography */
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  /* Transitions */
+  --transition-fast:  150ms ease;
+  --transition-base:  300ms ease;
+  --transition-slow:  500ms ease;
+}

@@ -1,0 +1,133 @@
+@import './variables.css';
+@import './animations.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  body {
+    @apply bg-primary text-textPrimary font-sans;
+    overflow-x: hidden;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+
+  /* ── Fixed corner color-blobs — exactly like the reference site ── */
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(120px);
+  }
+  /* Top-left purple blob */
+  body::before {
+    top: -200px;
+    left: -200px;
+    background: rgba(176, 38, 255, 0.22);
+  }
+  /* Bottom-right magenta blob */
+  body::after {
+    bottom: -200px;
+    right: -200px;
+    background: rgba(224, 64, 251, 0.16);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-primary;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-accent rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accentAlt;
+  }
+
+  ::selection {
+    @apply bg-accent text-white;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-heading {
+    @apply text-3xl sm:text-4xl font-bold text-textPrimary mb-2;
+  }
+
+  .section-subheading {
+    @apply text-textSecondary text-lg mb-12;
+  }
+
+  .accent-line {
+    @apply w-16 h-1 bg-gradient-to-r from-accent to-accentAlt rounded-full mb-4;
+  }
+
+  .card {
+    @apply bg-secondary border border-border rounded-2xl p-6 shadow-card
+           transition-all duration-300 hover:shadow-card-hover hover:border-accent/40
+           hover:-translate-y-1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white
+           bg-gradient-to-r from-accent to-accentAlt
+           hover:shadow-glow hover:-translate-y-0.5
+           transition-all duration-300;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold
+           border border-accent text-accent
+           hover:bg-accent hover:text-white hover:shadow-glow
+           transition-all duration-300;
+  }
+
+  .tag {
+    @apply px-3 py-1 text-xs font-medium rounded-full
+           bg-accent/10 text-accent border border-accent/20;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent to-accentAlt bg-clip-text text-transparent;
+  }
+
+  .glow-border {
+    @apply border border-accent/30 shadow-glow-sm;
+  }
+
+  /* Ensure all sections sit above the fixed blobs */
+  section, footer, nav {
+    position: relative;
+    z-index: 1;
+  }
+}
