@@ -1,18 +1,43 @@
 import { motion } from 'framer-motion'
-import { FiExternalLink, FiAward } from 'react-icons/fi'
-import { scaleIn } from '@/utils/constants'
+import { FiExternalLink } from 'react-icons/fi'
+
+const cardVariant = {
+  hidden:  { opacity: 0, y: 24, scale: 0.95 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: 'easeOut' } },
+}
 
 export default function CertCard({ cert }) {
   return (
-    <motion.div variants={scaleIn} className="card flex gap-4 items-start group">
-      {/* Icon / logo */}
-      <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-        <FiAward size={22} className="text-accent" />
+    <motion.div
+      variants={cardVariant}
+      className="group flex flex-col rounded-2xl overflow-hidden border border-white/[0.08]
+                 bg-[#0e0e14] hover:border-accent/30 transition-colors duration-300"
+    >
+      {/* ── Certificate image (top) ── */}
+      <div className="relative w-full bg-white overflow-hidden"
+           style={{ aspectRatio: '4/3' }}>
+        <img
+          src={cert.image}
+          alt={cert.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={e => {
+            e.target.style.display = 'none'
+            e.target.parentElement.style.background = 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)'
+          }}
+        />
       </div>
 
-      <div className="flex-1 min-w-0">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-textPrimary text-sm leading-snug">{cert.title}</h3>
+      {/* ── Info section (bottom) ── */}
+      <div className="px-4 py-4 flex flex-col gap-2">
+        {/* Row: pill tag + year + link */}
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1 text-[10px] font-semibold rounded-full
+                             bg-white/[0.07] border border-white/10 text-textSecondary">
+              Certifications
+            </span>
+            <span className="text-xs text-textSecondary">{cert.year}</span>
+          </div>
           {cert.credentialUrl && (
             <a
               href={cert.credentialUrl}
@@ -26,18 +51,11 @@ export default function CertCard({ cert }) {
           )}
         </div>
 
-        <p className="text-xs text-accent mt-1">{cert.issuer}</p>
-        <p className="text-xs text-textMuted mt-1">{cert.date}</p>
-
-        {cert.skills?.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-3">
-            {cert.skills.map((s) => (
-              <span key={s} className="px-2 py-0.5 text-xs rounded-md bg-primary text-textMuted border border-border">
-                {s}
-              </span>
-            ))}
-          </div>
-        )}
+        {/* Title */}
+        <h3 className="text-sm font-bold text-textPrimary leading-snug
+                       group-hover:text-accent transition-colors duration-200">
+          {cert.title}
+        </h3>
       </div>
     </motion.div>
   )

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Circular background with gradient -->
+  <defs>
+    <radialGradient id="grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#b026ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e040fb;stop-opacity:1" />
+    </radialGradient>
+    <clipPath id="circle">
+      <circle cx="100" cy="100" r="100" />
+    </clipPath>
+  </defs>
+  
+  <!-- Circle background -->
+  <circle cx="100" cy="100" r="100" fill="url(#grad)" />
+  
+  <!-- Initials inside circle -->
+  <text x="100" y="120" font-size="90" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial, sans-serif">AS</text>
+</svg>

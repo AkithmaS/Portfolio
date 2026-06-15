@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
-import { FiGithub, FiLinkedin, FiMail, FiArrowDown } from 'react-icons/fi'
+import { FiArrowDown } from 'react-icons/fi'
 import HeroTyping from './HeroTyping'
 import { personal } from '@/assets/data/personal'
 import { scrollToSection } from '@/utils/scrollTo'
-import { fadeInUp, slideInLeft, slideInRight } from '@/utils/constants'
+import { fadeInUp, slideInRight } from '@/utils/constants'
 import profileImg from '@/assets/images/profile.jpeg'
 
 export default function Hero() {
@@ -58,18 +58,9 @@ export default function Hero() {
             animate="visible"
             variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
           >
-            {/* Badge */}
-            <motion.div variants={fadeInUp} className="mb-4">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-accent/10 text-accent border border-accent/20">
-                <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                {personal.availability}
-              </span>
-            </motion.div>
-
             {/* Name */}
-            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-textPrimary mb-4 leading-tight">
-              Hi, I'm{' '}
-              <span className="gradient-text">{personal.name}</span>
+            <motion.h1 variants={fadeInUp} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+              {personal.name}
             </motion.h1>
 
             {/* Typing roles */}
@@ -92,29 +83,6 @@ export default function Hero() {
                 Download CV
               </a>
             </motion.div>
-
-            {/* Social icons */}
-            <motion.div variants={fadeInUp} className="flex items-center gap-4 justify-center lg:justify-start">
-              {[
-                { href: personal.social.github,   Icon: FiGithub,   label: 'GitHub'   },
-                { href: personal.social.linkedin, Icon: FiLinkedin, label: 'LinkedIn' },
-                { href: `mailto:${personal.email}`, Icon: FiMail,   label: 'Email'    },
-              ].map(({ href, Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center
-                             border border-border text-textSecondary
-                             hover:border-accent hover:text-accent hover:shadow-glow-sm
-                             transition-all duration-300"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* Right — profile image with multi-ring animation */}
@@ -125,7 +93,7 @@ export default function Hero() {
             variants={slideInRight}
           >
             <div className="relative flex items-center justify-center"
-                 style={{ width: '320px', height: '320px' }}>
+                 style={{ width: '450px', height: '450px' }}>
 
               {/* ── Outermost ring: slow clockwise dashed ── */}
               <div
@@ -140,7 +108,7 @@ export default function Hero() {
               <div
                 className="absolute rounded-full border-2 border-dashed animate-spin-ccw"
                 style={{
-                  inset: '18px',
+                  inset: '24px',
                   borderColor: 'rgba(224,64,251,0.30)',
                   borderStyle: 'dashed',
                 }}
@@ -150,7 +118,7 @@ export default function Hero() {
               <div
                 className="absolute rounded-full animate-ring-pulse"
                 style={{
-                  inset: '30px',
+                  inset: '40px',
                   boxShadow: '0 0 0 3px rgba(176,38,255,0.5), 0 0 40px rgba(176,38,255,0.35)',
                   borderRadius: '50%',
                 }}
@@ -167,7 +135,7 @@ export default function Hero() {
                   marginTop: '-6px',
                   marginLeft: '-6px',
                   animation: 'orbit 5s linear infinite',
-                  '--orbit-r': '145px',
+                  '--orbit-r': '200px',
                 }}
               >
                 <div className="w-3 h-3 rounded-full bg-accent shadow-glow-sm" />
@@ -184,7 +152,7 @@ export default function Hero() {
                   marginTop: '-4px',
                   marginLeft: '-4px',
                   animation: 'orbit 7s linear infinite reverse',
-                  '--orbit-r': '130px',
+                  '--orbit-r': '185px',
                 }}
               >
                 <div className="w-2 h-2 rounded-full bg-accentAlt" />
@@ -194,7 +162,7 @@ export default function Hero() {
               <div
                 className="absolute rounded-full"
                 style={{
-                  inset: '40px',
+                  inset: '50px',
                   background: 'radial-gradient(circle, rgba(176,38,255,0.25) 0%, transparent 70%)',
                   filter: 'blur(12px)',
                 }}
@@ -204,7 +172,7 @@ export default function Hero() {
               <div
                 className="absolute rounded-full overflow-hidden"
                 style={{
-                  inset: '40px',
+                  inset: '50px',
                   border: '3px solid rgba(176,38,255,0.7)',
                   boxShadow: '0 0 0 2px rgba(224,64,251,0.3), 0 0 50px rgba(176,38,255,0.4), inset 0 0 20px rgba(176,38,255,0.1)',
                 }}

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import SectionWrapper from '@/layouts/SectionWrapper'
 import CertCard from './CertCard'
 import { certificationsData } from '@/assets/data/certifications'
-import { fadeInUp, staggerContainer } from '@/utils/constants'
+import { fadeInUp } from '@/utils/constants'
 
 export default function Certifications() {
   return (
@@ -14,10 +14,13 @@ export default function Certifications() {
       </motion.div>
 
       <motion.div
-        variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.12 } },
+        }}
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
       >
         {certificationsData.map((cert) => (

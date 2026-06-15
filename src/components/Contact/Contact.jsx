@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FiMail, FiPhone, FiMapPin, FiGithub, FiLinkedin } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin } from 'react-icons/fi'
 import SectionWrapper from '@/layouts/SectionWrapper'
 import ContactForm from './ContactForm'
 import { personal } from '@/assets/data/personal'
@@ -51,19 +51,7 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Social */}
-          <div className="flex gap-3 pt-2">
-            <a href={personal.social.github} target="_blank" rel="noreferrer"
-              className="w-10 h-10 rounded-xl border border-border text-textSecondary flex items-center justify-center
-                         hover:border-accent hover:text-accent hover:shadow-glow-sm transition-all">
-              <FiGithub size={18} />
-            </a>
-            <a href={personal.social.linkedin} target="_blank" rel="noreferrer"
-              className="w-10 h-10 rounded-xl border border-border text-textSecondary flex items-center justify-center
-                         hover:border-accent hover:text-accent hover:shadow-glow-sm transition-all">
-              <FiLinkedin size={18} />
-            </a>
-          </div>
+
         </motion.div>
 
         {/* Right — form */}

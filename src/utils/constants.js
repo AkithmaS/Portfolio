@@ -2,9 +2,10 @@
 export const NAV_LINKS = [
   { label: 'Home',         id: 'home' },
   { label: 'About',        id: 'about' },
+  { label: 'Education',    id: 'education' },
   { label: 'Skills',       id: 'skills' },
   { label: 'Projects',     id: 'projects' },
-  { label: 'Certificates', id: 'certifications' },
+  { label: 'Certifications', id: 'certifications' },
 ]
 
 /** Framer Motion shared animation variants */

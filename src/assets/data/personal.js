@@ -6,6 +6,7 @@ export const personal = {
     'Software Engineer',
     'Quality Assurance Engineer',
     'Mobile App Developer',
+    'Business Analyst',
     'UI/UX Enthusiast',
     'Problem Solver',
   ],
@@ -16,7 +17,7 @@ with a passion for software development and technology. I enjoy building applica
   email: 'akihaputhantri@gmail.com',
   phone: '+94 71 041 6091',
   location: 'Colombo, Sri Lanka',
-  resumeUrl: 'mailto:akihaputhantri@gmail.com',
+  resumeUrl: '/resume/Akithma_Haputhantri_Resume.pdf',
   social: {
     github:    'https://github.com/AkithmaS',
     linkedin:  'https://www.linkedin.com/in/akithmasandanaki/'

@@ -1,15 +1,15 @@
-import { useState, useRef } from 'react'
-import emailjs from '@emailjs/browser'
+import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { FiSend } from 'react-icons/fi'
-import { EMAILJS_CONFIG } from '@/utils/constants'
+
+// Replace with your Formspree form ID after creating a form at formspree.io
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xlgkzbdp'
 
 const initialState = { name: '', email: '', subject: '', message: '' }
 
 export default function ContactForm() {
-  const [form,     setForm]     = useState(initialState)
-  const [loading,  setLoading]  = useState(false)
-  const formRef = useRef(null)
+  const [form,    setForm]    = useState(initialState)
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -23,13 +23,13 @@ export default function ContactForm() {
 
     setLoading(true)
     try {
-      await emailjs.sendForm(
-        EMAILJS_CONFIG.serviceId,
-        EMAILJS_CONFIG.templateId,
-        formRef.current,
-        EMAILJS_CONFIG.publicKey
-      )
-      toast.success('Message sent! I\'ll get back to you soon.')
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(form),
+      })
+      if (!res.ok) throw new Error('Failed')
+      toast.success("Message sent! I'll get back to you soon.")
       setForm(initialState)
     } catch {
       toast.error('Failed to send message. Please try again or email directly.')
@@ -39,7 +39,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-textSecondary mb-1.5">

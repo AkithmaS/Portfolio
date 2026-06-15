@@ -1,44 +1,65 @@
 import { motion } from 'framer-motion'
 import SectionWrapper from '@/layouts/SectionWrapper'
+import { skills } from '@/assets/data/skills'
+import { fadeInUp } from '@/utils/constants'
 import SkillCard from './SkillCard'
-import { skillCategories } from '@/assets/data/skills'
-import { fadeInUp, staggerContainer } from '@/utils/constants'
+
+const chunkSkills = () => {
+  const size = Math.ceil(skills.length / 3)
+  return [
+    skills.slice(0, size),
+    skills.slice(size, size * 2),
+    skills.slice(size * 2),
+  ]
+}
+const [row1, row2, row3] = chunkSkills()
+
+function MarqueeRow({ items, reverse = false }) {
+  const doubled = [...items, ...items]
+  return (
+    <div className="w-full overflow-x-clip">
+      <div className={`flex gap-3 w-max ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'}`}>
+        {doubled.map((skill, idx) => (
+          <SkillCard key={`${skill.name}-${idx}`} skill={skill} />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function Skills() {
   return (
     <SectionWrapper id="skills">
-      {/* Heading */}
+
       <motion.div variants={fadeInUp} className="text-center mb-14">
         <div className="accent-line mx-auto" />
-        <h2 className="section-heading">Skills</h2>
-        <p className="section-subheading">Technologies I work with</p>
+        <h2 className="section-heading">Technical Skills</h2>
+        <p className="section-subheading max-w-xl mx-auto">
+          Technologies, tools, and frameworks I use to build reliable software solutions.
+        </p>
       </motion.div>
 
-      <div className="space-y-10">
-        {skillCategories.map((cat) => (
-          <motion.div key={cat.category} variants={fadeInUp}>
-            {/* Category header */}
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-2xl">{cat.icon}</span>
-              <h3 className="text-lg font-bold text-textPrimary">{cat.category}</h3>
-              <div className="flex-1 h-px bg-border" />
-            </div>
+      <motion.div variants={fadeInUp} className="flex flex-col gap-3">
+        <MarqueeRow items={row1} reverse={false} />
+        <MarqueeRow items={row2} reverse={true} />
+        <MarqueeRow items={row3} reverse={false} />
+      </motion.div>
 
-            {/* Skills grid */}
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-            >
-              {cat.skills.map((skill) => (
-                <SkillCard key={skill.name} skill={skill} />
-              ))}
-            </motion.div>
-          </motion.div>
-        ))}
-      </div>
+      <style>{`
+        @keyframes marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-reverse {
+          0%   { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-marquee         { animation: marquee         90s linear infinite; }
+        .animate-marquee-reverse { animation: marquee-reverse 90s linear infinite; }
+        .animate-marquee:hover,
+        .animate-marquee-reverse:hover { animation-play-state: paused; }
+      `}</style>
+
     </SectionWrapper>
   )
 }

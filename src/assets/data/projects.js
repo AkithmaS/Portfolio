@@ -1,76 +1,80 @@
+import pantrypal     from '@/assets/images/pantrypal.png'
+import rentme        from '@/assets/images/rentme.jpg'
+import helacraft     from '@/assets/images/helacraft.jpg'
+import swiftlogistic from '@/assets/images/swiftlogistic.png'
+import cli           from '@/assets/images/cli.png'
+
 export const projectsData = [
+  /* ── Tab One ── */
   {
     id: 1,
-    title: 'E-Commerce Platform',
-    category: 'Web',
+    title: 'PantryPal',
+    category: 'Tab One',
     description:
-      'A full-stack e-commerce web application with product management, shopping cart, online payments, and an admin dashboard.',
-    image: '/images/projects/project1.png',
-    tech: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
-    github: 'https://github.com/yourusername/ecommerce',
-    demo: 'https://yourproject.vercel.app',
-    featured: true,
+      'AI-powered pantry and meal planning platform that generates recipes from available ingredients.',
+    image: pantrypal,
+    tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'Google Gemini AI'],
+    github: 'https://github.com/AkithmaS/PantryPal',
+    demo: null,
   },
   {
     id: 2,
-    title: 'Employee Management System',
-    category: 'Web',
+    title: 'RentMe',
+    category: 'Tab One',
     description:
-      'A web-based HR platform integrating employee records, payroll, leave management, and performance tracking.',
-    image: '/images/projects/project2.png',
-    tech: ['React', 'Spring Boot', 'PostgreSQL', 'Docker', 'Figma'],
-    github: 'https://github.com/yourusername/emp-management',
+      'Luxury car rental management system with booking, vehicle tracking, and role-based access control.',
+    image: rentme,
+    tech: ['MongoDB', 'Express.js', 'React.js', 'Node.js'],
+    github: 'https://github.com/AkithmaS/RentMe',
     demo: null,
-    featured: true,
   },
   {
     id: 3,
-    title: 'Skincare Mobile App',
-    category: 'Mobile',
+    title: 'HelaCraft',
+    category: 'Tab One',
     description:
-      'A Flutter mobile app for beauty course enrollment, tutorial streaming, online payments, and progress tracking.',
-    image: '/images/projects/project3.png',
-    tech: ['Flutter', 'Dart', 'Firebase', 'Figma'],
-    github: 'https://github.com/yourusername/skincare-app',
+      'E-commerce marketplace connecting Sri Lankan artisans with customers for handmade product sales.',
+    image: helacraft,
+    tech: ['PHP', 'MySQL', 'JavaScript', 'HTML/CSS'],
+    github: 'https://github.com/madhushankast/HelaCraft',
     demo: null,
-    featured: true,
   },
+
+  /* ── Tab Two ── */
   {
     id: 4,
-    title: 'AI Chatbot Assistant',
-    category: 'AI',
+    title: 'SwiftTrack',
+    category: 'Tab Two',
     description:
-      'An intelligent chatbot using NLP to answer questions and provide personalized responses through a web interface.',
-    image: '/images/projects/project4.png',
-    tech: ['Python', 'Flask', 'OpenAI API', 'React'],
-    github: 'https://github.com/yourusername/ai-chatbot',
-    demo: 'https://chatbot.vercel.app',
-    featured: false,
+      'Microservices-based logistics middleware enabling real-time order tracking and system integration.',
+    image: swiftlogistic,
+    tech: ['Java', 'Spring Boot', 'RabbitMQ', 'PostgreSQL', 'Docker'],
+    github: 'https://github.com/gethmiPerera/swiftlogistics',
+    demo: null,
+    objectFit: 'contain',
   },
   {
     id: 5,
-    title: 'Task Management App',
-    category: 'Web',
+    title: 'Ludo-CS',
+    category: 'Tab Two',
     description:
-      'A Kanban-style task management web app with drag-and-drop, real-time updates, and team collaboration features.',
-    image: '/images/projects/project5.png',
-    tech: ['React', 'Firebase', 'Tailwind CSS'],
-    github: 'https://github.com/yourusername/task-manager',
-    demo: 'https://tasks.vercel.app',
-    featured: false,
+      'Command-line Ludo game featuring advanced gameplay mechanics, AI-driven rules, and custom board logic.',
+    image: cli,
+    tech: ['C'],
+    github: 'https://github.com/AkithmaS/LUDO-using-C',
+    demo: null,
   },
   {
     id: 6,
-    title: 'University Course Portal',
-    category: 'Web',
+    title: 'NexusEnroll',
+    category: 'Tab Two',
     description:
-      'A student portal for course registration, timetable management, results viewing, and lecturer communication.',
-    image: '/images/projects/project6.png',
-    tech: ['React', 'Node.js', 'MySQL', 'Express'],
-    github: 'https://github.com/yourusername/course-portal',
+      'Backend-focused university enrollment system designed with a scalable 3-tier architecture, automating course registration, validation, and academic management workflows.',
+    image: cli,
+    tech: ['Java', 'Python'],
+    github: 'https://github.com/gethmiPerera/NexusEnroll-New',
     demo: null,
-    featured: false,
   },
 ]
 
-export const projectCategories = ['All', 'Web', 'Mobile', 'AI']
+export const projectTabs = ['Tab One', 'Tab Two']

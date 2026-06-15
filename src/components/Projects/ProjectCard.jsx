@@ -1,93 +1,96 @@
 import { motion } from 'framer-motion'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
-import { scaleIn } from '@/utils/constants'
+
+const cardVariant = {
+  hidden:  { opacity: 0, y: 24, scale: 0.95 },
+  visible: { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.45, ease: 'easeOut' } },
+}
 
 export default function ProjectCard({ project }) {
   return (
-    <motion.div
-      variants={scaleIn}
-      layout
-      className="card group overflow-hidden flex flex-col"
-    >
-      {/* Image */}
-      <div className="relative overflow-hidden rounded-xl mb-5 bg-secondary aspect-video">
+    <motion.div variants={cardVariant} className="flex flex-col gap-3">
+
+      {/* Title above the card */}
+      <h3 className="text-base font-bold text-textPrimary text-center px-1">
+        {project.title}
+      </h3>
+
+      {/* Card */}
+      <div
+        className="group relative rounded-3xl overflow-hidden border border-white/10
+                   bg-[#0e0e14] cursor-default"
+        style={{ aspectRatio: '4/3' }}
+      >
+        {/* Image */}
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          onError={(e) => {
-            e.target.parentElement.innerHTML = `
-              <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-accent/20 to-accentAlt/20">
-                <span class="text-4xl">🚀</span>
-              </div>`
-          }}
+          className={`absolute inset-0 w-full h-full transition-transform duration-500
+                      group-hover:scale-105
+                      ${project.objectFit === 'contain' ? 'object-contain p-4' : 'object-cover'}`}
         />
-        {/* Overlay on hover */}
-        <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-textPrimary hover:text-accent transition-colors"
-              aria-label="GitHub"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FiGithub size={18} />
-            </a>
-          )}
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-textPrimary hover:text-accent transition-colors"
-              aria-label="Live demo"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <FiExternalLink size={18} />
-            </a>
-          )}
-        </div>
-      </div>
 
-      {/* Content */}
-      <div className="flex flex-col flex-1">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-bold text-textPrimary text-lg group-hover:text-accent transition-colors">
+        {/* Hover overlay */}
+        <div
+          className="absolute inset-0 flex flex-col items-center justify-center
+                     px-6 py-6 text-center
+                     opacity-0 group-hover:opacity-100
+                     transition-opacity duration-300"
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(110,30,180,0.45) 0%, rgba(176,38,255,0.42) 50%, rgba(100,20,160,0.45) 100%)',
+          }}
+        >
+          <h3 className="text-lg font-bold text-white mb-3 leading-snug">
             {project.title}
           </h3>
-          <span className="tag flex-shrink-0">{project.category}</span>
+          <p className="text-sm text-white/90 italic leading-relaxed mb-4">
+            {project.description}
+          </p>
+          <p className="text-sm font-bold text-white leading-relaxed mb-5">
+            {project.tech.join(', ')}
+          </p>
+          <div className="flex items-center gap-3">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className="w-10 h-10 rounded-full bg-white/15 border border-white/30
+                           flex items-center justify-center text-white
+                           hover:bg-white/30 transition-colors duration-200"
+                onClick={e => e.stopPropagation()}
+              >
+                <FiGithub size={17} />
+              </a>
+            )}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Live demo"
+                className="w-10 h-10 rounded-full bg-white/15 border border-white/30
+                           flex items-center justify-center text-white
+                           hover:bg-white/30 transition-colors duration-200"
+                onClick={e => e.stopPropagation()}
+              >
+                <FiExternalLink size={17} />
+              </a>
+            )}
+          </div>
         </div>
 
-        <p className="text-sm text-textSecondary leading-relaxed flex-1 mb-4">
-          {project.description}
-        </p>
-
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {project.tech.map((t) => (
-            <span key={t} className="px-2 py-0.5 text-xs rounded-md bg-primary text-textMuted border border-border">
-              {t}
-            </span>
-          ))}
-        </div>
-
-        {/* Links */}
-        <div className="flex gap-3 pt-3 border-t border-border">
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noreferrer"
-              className="flex items-center gap-1.5 text-xs text-textSecondary hover:text-accent transition-colors">
-              <FiGithub size={13} /> Code
-            </a>
-          )}
-          {project.demo && (
-            <a href={project.demo} target="_blank" rel="noreferrer"
-              className="flex items-center gap-1.5 text-xs text-textSecondary hover:text-accent transition-colors">
-              <FiExternalLink size={13} /> Live Demo
-            </a>
-          )}
-        </div>
+        {/* Accent dot — bottom-right, hides on hover */}
+        <span
+          className="absolute bottom-3 right-3 w-4 h-4 rounded-full z-20
+                     group-hover:opacity-0 transition-opacity duration-300"
+          style={{
+            background: 'linear-gradient(135deg, #b026ff, #e040fb)',
+            boxShadow: '0 0 10px #b026ffaa',
+          }}
+        />
       </div>
     </motion.div>
   )

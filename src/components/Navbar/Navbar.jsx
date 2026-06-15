@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenuAlt3, HiX } from 'react-icons/hi'
-import { FiLinkedin, FiGithub, FiInstagram } from 'react-icons/fi'
+import { FiLinkedin, FiGithub, FiMail } from 'react-icons/fi'
 import { NAV_LINKS } from '@/utils/constants'
 import { scrollToSection } from '@/utils/scrollTo'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
@@ -11,7 +11,7 @@ export default function Navbar() {
   const [isOpen,     setIsOpen]     = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  const sectionIds    = NAV_LINKS.map((l) => l.id)
+  const sectionIds    = [...NAV_LINKS.map((l) => l.id), 'contact']
   const activeSection = useScrollSpy(sectionIds)
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function Navbar() {
   const socialLinks = [
     { Icon: FiLinkedin,  href: personal.social.linkedin, label: 'LinkedIn'  },
     { Icon: FiGithub,    href: personal.social.github,   label: 'GitHub'    },
-    { Icon: FiInstagram, href: personal.social.instagram || '#', label: 'Instagram' },
+    { Icon: FiMail,      href: `mailto:${personal.email}`, label: 'Email'   },
   ]
 
   return (
@@ -49,7 +49,7 @@ export default function Navbar() {
       <div className="section-container">
         <div className="flex items-center justify-between h-16 lg:h-[70px]">
 
-          {/* ── Logo ── */}
+          {/* Logo */}
           <button
             onClick={() => handleNavClick('home')}
             className="text-white font-bold text-lg tracking-wide hover:text-accent transition-colors duration-200 select-none"
@@ -102,17 +102,21 @@ export default function Navbar() {
               </a>
             ))}
 
-            {/* Let's Connect — purple gradient glow button matching reference site */}
+            {/* Let's Connect — ripple effect, purple→white when in contact section */}
             <button
               onClick={() => handleNavClick('contact')}
-              className="ml-1 px-5 py-2 text-sm font-semibold text-white rounded-lg
-                         transition-all duration-300 hover:-translate-y-0.5"
-              style={{
-                background: 'linear-gradient(135deg, #b026ff 0%, #e040fb 100%)',
-                boxShadow: '0 0 18px rgba(176,38,255,0.55)',
-              }}
-              onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 30px rgba(176,38,255,0.85)'}
-              onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 18px rgba(176,38,255,0.55)'}
+              className={`ml-1 px-5 py-2 text-sm font-semibold rounded-md
+                         relative overflow-hidden z-30
+                         after:-z-20 after:absolute after:h-1 after:w-1
+                         after:left-5 after:bottom-0 after:translate-y-full after:rounded-md
+                         after:hover:scale-[300]
+                         after:hover:transition-all after:hover:duration-700
+                         after:transition-all after:duration-700
+                         transition-all duration-700
+                         ${activeSection === 'contact'
+                           ? 'bg-white text-[#b026ff] after:bg-white [text-shadow:none]'
+                           : 'bg-[#b026ff] text-white after:bg-white [text-shadow:2px_2px_4px_#7b00cc] hover:[text-shadow:1px_1px_2px_#e040fb]'
+                         }`}
             >
               Let's Connect
             </button>
@@ -182,12 +186,18 @@ export default function Navbar() {
               ))}
               <button
                 onClick={() => handleNavClick('contact')}
-                className="ml-auto px-5 py-2 text-sm font-semibold text-white rounded-lg
-                           transition-all duration-300"
-                style={{
-                  background: 'linear-gradient(135deg, #b026ff 0%, #e040fb 100%)',
-                  boxShadow: '0 0 18px rgba(176,38,255,0.55)',
-                }}
+                className={`ml-auto px-5 py-2 text-sm font-semibold rounded-md
+                           relative overflow-hidden z-30
+                           after:-z-20 after:absolute after:h-1 after:w-1
+                           after:left-5 after:bottom-0 after:translate-y-full after:rounded-md
+                           after:hover:scale-[300]
+                           after:hover:transition-all after:hover:duration-700
+                           after:transition-all after:duration-700
+                           transition-all duration-700
+                           ${activeSection === 'contact'
+                             ? 'bg-white text-[#b026ff]'
+                             : 'bg-[#b026ff] text-white after:bg-white'
+                           }`}
               >
                 Let's Connect
               </button>

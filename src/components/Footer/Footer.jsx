@@ -2,6 +2,7 @@ import { FiGithub, FiLinkedin, FiMail, FiHeart } from 'react-icons/fi'
 import { personal } from '@/assets/data/personal'
 import { NAV_LINKS } from '@/utils/constants'
 import { scrollToSection } from '@/utils/scrollTo'
+import profileImg from '@/assets/images/profile.jpeg'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -14,12 +15,19 @@ export default function Footer() {
           <div>
             <button
               onClick={() => scrollToSection('home')}
-              className="font-mono text-xl font-bold gradient-text mb-3 block"
+              className="flex items-center gap-3 mb-3 group"
             >
-              &lt;YN /&gt;
+              <img
+                src={profileImg}
+                alt={personal.name}
+                className="w-9 h-9 rounded-full object-cover object-top border-2 border-white/20 group-hover:border-white/50 transition-all scale-125"
+              />
+              <span className="text-white font-semibold text-sm tracking-wide group-hover:text-white/80 transition-colors">
+                {personal.name}
+              </span>
             </button>
             <p className="text-sm text-textSecondary leading-relaxed">
-              Software Engineering undergraduate passionate about building
+              Computer Science undergraduate passionate about building
               impactful digital experiences.
             </p>
           </div>
